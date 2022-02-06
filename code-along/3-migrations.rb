@@ -1,7 +1,7 @@
 # This is a Rails app and we want to load all the files in the app 
 # when running this code.  To do so, your current working directory
 # should be the top-level directory (i.e. /workspace/your-app/) and then run:
-# rails runner code-along/3-migrations.rb
+# rails runner code-along-complete/3-migrations.rb
 
 # **************************
 # Don't change or move
@@ -26,10 +26,14 @@ Salesperson.destroy_all
 
 # 5. insert new rows in the table
 
-salesperson = Salesperson.new
-salesperson.first_name = "Dustin"
-salesperson.last_name = "Horning"
-salesperson.email = "dhorning028@gmail.com"
-salesperson.save
+salesperson1 = Salesperson.new
+salesperson1.first_name = "Brian"
+salesperson1.last_name = "Eng"
+salesperson1.email = "brian@test.com"
+salesperson1.save
 
-puts Salesperson.all.count
+salesperson2 = Salesperson.new
+salesperson2.first_name = "Ben"
+salesperson2.last_name = "Block"
+salesperson2.email = "ben@test.com"
+salesperson2.save

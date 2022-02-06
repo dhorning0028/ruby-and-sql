@@ -1,7 +1,7 @@
 # This is a Rails app and we want to load all the files in the app 
 # when running this code.  To do so, your current working directory
 # should be the top-level directory (i.e. /workspace/your-app/) and then run:
-# rails runner code-along/1-models.rb
+# rails runner code-along-complete/1-models.rb
 
 # **************************
 # Don't change or move
@@ -11,73 +11,63 @@ Company.destroy_all
 # 1a. check out the schema file
 # 1b. check out the model file
 
-puts "There are #{Company.all.count} companies"
+# Number of rows in companies table
+
+p Company.all.count
 
 # 2. create new companies
-values = { 
-    name: "Apple", 
-    url: "https://apple.com", 
-    city: "Cupertino", 
-    state: "CA"
-}
-company = Company.new(values)
-company.save
 
-puts "There are #{Company.all.count} companies"
+# Insert a row
+values = { name: "Apple Inc.", url: "https://www.apple.com", city: "Cupertino", state: "CA" }
+apple = Company.new(values)
+apple.save
 
-values = { 
-    name: "Amazon", 
-    url: "https://amazon.com", 
-    city: "Seattle", 
-    state: "WA"
-}
-company = Company.new(values)
-company.save
+# pay attention to the SQL in the log
 
-puts "There are #{Company.all.count} companies"
+p Company.all.count
 
-# values = { 
-#     name: "Microsoft", 
-#     url: "https://microsoft.com", 
-#     city: "Seattle", 
-#     state: "WA"
-# }
-company = Company.new
-# company.write_attribute(:name, "Tesla")
-company.name = "Telsa"
-# company.write_attribute(:url, "https://tesla.com")
-company.url = "https://tesla.com"
-# company.write_attribute(:city, "Palo Alto")
-company.city = "Palo Alto"
-# company.write_attribute(:state, "CA")
-company.state = "CA"
-company.save
-#multiple different ways to enter data above
+# Insert another row
+values = { name: "Amazon.com, Inc.", url: "https://www.amazon.com", city: "Seattle", state: "WA" }
+amazon = Company.new(values)
+amazon.save
 
-puts "There are #{Company.all.count} companies"
+# pay attention to the SQL in the log
+
+p Company.all.count
 
 # 3. query companies table
 
-# puts Company.all.inspect
+# All rows in companies table
+p Company.all
 
-# companies = Company.where({ state: "CA"})
-# # where helps filter
-# puts companies.inspect
+# All rows in companies table where state is "CA"
+p Company.where({ state: "CA" })
 
-puts Company.where({ state: "CA", name: "Apple"}).count
-apple = Company.where({ state: "CA", name: "Apple"})[0]
-puts apple.inspect
-
-#cat log/development.log shows the log history of what happened in the code
+# Single row in companies table where name is "Apple Inc."
+company = Company.where({ name: "Apple Inc." })[0]
+p company
 
 # 4. read column values from row
-# puts apple.read_attribute(:url)
-# puts "#{apple.read_attribute(:name)} has a website: #{apple.read_attribute(:url)}""
-puts "#{apple.name} has a website #{apple.url}"
-apple.slogan = "Think Different"
-apple.save
 
-puts apple.inspect
+p company.read_attribute(:url)
+# OR shortcut
+p company.url
 
-# data name.destroy removes the data
 # 5. update attribute value
+
+company.write_attribute(:slogan, "Think Different.")
+# OR shortcut
+company.slogan = "Think Different."
+company.save
+
+p company
+
+# 6. create a new company using individual attribute assignment:
+
+new_company = Company.new
+new_company.name = "Tesla, Inc."
+new_company.url = "https://www.tesla.com"
+new_company.city = "Palo Alto"
+new_company.state = "CA"
+new_company.save
+

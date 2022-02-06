@@ -1,3 +1,3 @@
 class Contact < ApplicationRecord
-    belonds_to :company
+    belongs_to :company
 end

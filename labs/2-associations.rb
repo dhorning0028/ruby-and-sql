@@ -12,26 +12,15 @@
 # Elon Musk - elon@tesla.com - Tesla, Inc.
 # Tim Cook - tim@apple.com - Apple Inc.
 
-
-# apple = Company.where({ name: "Apple"})[0]
-# contacts = apple.contacts
-contacts = Contact.all
 puts "Contacts: #{Contact.all.count}"
-for contact in contacts 
-    puts "#{contact.first_name} #{contact.last_name} - #{contact.email} - #{contact.company.name}"
+contacts = Contact.all
+for contact in contacts
+    # company = Company.where(id: contact.company_id)[0]
+    company = contact.company
+    puts "#{contact.first_name} #{contact.last_name} - #{contact.email} - #{company.name}"
 end
 
 # 2. similar to above, but this time organized by company, write code to display each company (name) and its contacts, e.g.:
-companies = Company.all
-for company in companies
-    puts company.name
-    contacts = company.contaacts
-    for contact in contacts
-        puts "puts #{contact.first_name} #{contact.last_name} - #{contact.email}"
-    end
-    puts ""
-end
-
 
 # ---------------------------------
 # Apple Inc.
@@ -43,3 +32,14 @@ end
 #
 # Tesla, Inc.
 # Elon Musk - elon@tesla.com
+
+companies = Company.all
+for company in companies
+    puts company.name
+    # contacts = Contact.where(company_id: contact.id)
+    contacts = company.contacts
+
+    for contact in contacts
+        puts "#{contact.first_name} #{contact.last_name} - #{contact.email}"
+    end
+end
